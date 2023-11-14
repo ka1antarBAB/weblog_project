@@ -8,11 +8,12 @@ class Post(models.Model):
         ("pub", "Published"),
         ("drf", "Draft")
     )
+    status = models.CharField(choices=STATUS_CHOICES, max_length=3)
     text = models.CharField(max_length=100)
     title = models.TextField()
-    status = models.CharField(choices=STATUS_CHOICES, max_length=3)
     date_and_time_created = models.DateTimeField(auto_now_add=True)
     date_and_time_modified = models.DateTimeField(auto_now=True)
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
 
-
+    def __str__(self):
+        return self.title
