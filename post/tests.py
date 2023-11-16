@@ -48,3 +48,11 @@ class PostTest(TestCase):
     def test_post_does_not_exits_404_error(self):
         response = self.client.get(reverse("post_detail_view", args=[999]))
         self.assertEqual(response.status_code, 404)
+
+    def test_view_renders_correct_template_for_post_list(self):
+        response = self.client.get(reverse("post_list_view"))
+        self.assertTemplateUsed(response, template_name="post/posts_list.html")
+
+    def test_view_renders_correct_template_for_post_detail(self):
+        response = self.client.get(reverse("post_detail_view", args=[self.post.id]))
+        self.assertTemplateUsed(response, template_name="post/post_detail.html")
