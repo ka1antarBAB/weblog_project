@@ -32,3 +32,15 @@ class PostTest(TestCase):
         self.assertContains(response, self.post.title)
         self.assertContains(response, self.post.text)
         self.assertContains(response, self.post.author)
+
+    def test_post_detail_url(self):
+        response = self.client.get(f"/blog/{self.post.id}/")
+        self.assertContains(response, self.post.title)
+        self.assertContains(response, self.post.text)
+        self.assertContains(response, self.post.author)
+
+    def test_post_detail_by_name(self):
+        response = self.client.get(reverse("post_detail_view", args=[self.post.id]))
+        self.assertContains(response, self.post.title)
+        self.assertContains(response, self.post.text)
+        self.assertContains(response, self.post.author)
