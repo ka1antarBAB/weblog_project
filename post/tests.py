@@ -44,3 +44,7 @@ class PostTest(TestCase):
         self.assertContains(response, self.post.title)
         self.assertContains(response, self.post.text)
         self.assertContains(response, self.post.author)
+
+    def test_post_does_not_exits_404_error(self):
+        response = self.client.get(reverse("post_detail_view", args=[999]))
+        self.assertEqual(response.status_code, 404)
