@@ -19,8 +19,8 @@ class PostTest(TestCase):
             author=self.user,
         )
         self.post2 = Post.objects.create(
-            title="title check",
-            text="text check",
+            title="title post2 check",
+            text="text post2 check",
             status=Post.STATUS_CHOICES[1][0],
             author=self.user,
         )
@@ -66,6 +66,6 @@ class PostTest(TestCase):
     def test_draft_post_not_show(self):
         response = self.client.get(reverse("post_list_view"))
         self.assertNotContains(response, self.post2.title)
-        self.assertNotContains(response, self.post2.author)
         self.assertNotContains(response, self.post2.text)
+
 
