@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404
 
 
 def post_list_view(request):
-    posts = Post.objects.all()
     posts = Post.objects.filter(status="pub")
     return render(request, "post/posts_list.html", {"posts_list": posts})
 
