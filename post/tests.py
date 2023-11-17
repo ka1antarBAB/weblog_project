@@ -18,6 +18,12 @@ class PostTest(TestCase):
             status=Post.STATUS_CHOICES[0][0],
             author=self.user,
         )
+        self.post2 = Post.objects.create(
+            title="title check",
+            text="text check",
+            status=Post.STATUS_CHOICES[1][0],
+            author=self.user,
+        )
 
     def test_post_list_url(self):
         response = self.client.get("/blog/")
@@ -56,3 +62,10 @@ class PostTest(TestCase):
     def test_view_renders_correct_template_for_post_detail(self):
         response = self.client.get(reverse("post_detail_view", args=[self.post.id]))
         self.assertTemplateUsed(response, template_name="post/post_detail.html")
+
+    def test_draft_post_not_show(self):
+        response = self.client.get(reverse("post_list_view"))
+        self.assertNotContains(response, self.post2.title)
+        self.assertNotContains(response, self.post2.author)
+        self.assertNotContains(response, self.post2.text)
+
