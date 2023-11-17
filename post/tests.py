@@ -8,21 +8,22 @@ from .models import Post
 
 # Create your tests here.
 class PostTest(TestCase):
-    def setUp(self):
-        self.user = User.objects.create(
-            username="userCheck"
-        )
-        self.post = Post.objects.create(
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create(
+                username="userCheck"
+            )
+        cls.post = Post.objects.create(
             title="title check",
             text="text check",
             status=Post.STATUS_CHOICES[0][0],
-            author=self.user,
+            author=cls.user,
         )
-        self.post2 = Post.objects.create(
+        cls.post2 = Post.objects.create(
             title="title post2 check",
             text="text post2 check",
             status=Post.STATUS_CHOICES[1][0],
-            author=self.user,
+            author=cls.user,
         )
 
     def test_post_list_url(self):
@@ -67,5 +68,3 @@ class PostTest(TestCase):
         response = self.client.get(reverse("post_list_view"))
         self.assertNotContains(response, self.post2.title)
         self.assertNotContains(response, self.post2.text)
-
-
