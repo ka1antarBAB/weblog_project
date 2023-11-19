@@ -11,8 +11,8 @@
                     <p class="small text-muted mt-2">{{ post_detail.author }}</p>
                     <p class="mt-2">{{ post_detail.text }}</p>
                     <div>
-{#                        <a href="{% url 'post_update' post_detail.id %}"><div class="btn btn-sm btn-info">Edit</div></a>#}
-{#                        <a href="{% url 'post_delete' post_detail.id %}"><div class="btn btn-sm btn-danger">Delete</div></a>#}
+                        <a href="{% url 'post_update_view' post_detail.id %}"><div class="btn btn-sm btn-info">Edit</div></a>
+                        <a href="{% url 'post_delete_view' post_detail.id %}"><div class="btn btn-sm btn-danger">Delete</div></a>
                     </div>
                 </div>
 
