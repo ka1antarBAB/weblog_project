@@ -43,3 +43,11 @@ def post_update_view(request, pk):
         return redirect("post_list_view")
     return render(request, "post/post_create.html", {"form": form})
 
+
+def post_delete_view(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        post.delete()
+        return redirect("post_list_view")
+    return render(request, "post/post_delete.html", {"post":post})
+
