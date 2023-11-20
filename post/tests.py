@@ -26,6 +26,10 @@ class PostTest(TestCase):
             author=cls.user,
         )
 
+    def test_post_model_str(self):
+        post = self.post
+        self.assertEqual(str(post), post.title)
+
     def test_post_list_url(self):
         response = self.client.get("/blog/")
         self.assertEqual(response.status_code, 200)
