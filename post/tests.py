@@ -72,3 +72,31 @@ class PostTest(TestCase):
         response = self.client.get(reverse("post_list_view"))
         self.assertNotContains(response, self.post2.title)
         self.assertNotContains(response, self.post2.text)
+
+    def test_post_create_view(self):
+        response = self.client.post(reverse("post_create_view"), {
+            "title": "test title",
+            "text": "test text",
+            "status": "pub",
+            "author": self.user.id,
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.last().title, "test title")
+        self.assertEqual(Post.objects.last().text, "test text")
+        self.assertEqual(Post.objects.last().status, "pub")
+        self.assertEqual(Post.objects.last().author, self.user)
+
+    def test_post_update_view(self):
+        response = self.client.post(reverse("post_update_view", args=[self.post2.id]), {
+            "title": "test title update",
+            "text": "test text update",
+            "status": "pub",
+            "author": self.post2.author.id,
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.last().title, "test title update")
+        self.assertEqual(Post.objects.last().text, "test text update")
+
+    def test_post_delete_view(self):
+        response = self.client.post(reverse("post_delete_view", args=[self.post2.id]))
+        self.assertEqual(response.status_code, 302)
