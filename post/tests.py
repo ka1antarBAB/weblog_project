@@ -100,3 +100,4 @@ class PostTest(TestCase):
     def test_post_delete_view(self):
         response = self.client.post(reverse("post_delete_view", args=[self.post2.id]))
         self.assertEqual(response.status_code, 302)
+
