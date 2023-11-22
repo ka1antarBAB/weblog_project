@@ -30,7 +30,8 @@
                 <button class="btn btn-success">Hey {{ user.username }}!</button> |
                 <a href="{% url 'logout' %}"><button class="btn btn-danger">Logout</button></a>
             {% else %}
-                <a href="{% url 'login' %}"><button class="btn btn-success">Login</button></a>
+                <a href="{% url 'login' %}"><button class="btn btn-success">LogIn</button></a> |
+                <a href="{% url 'signup' %}"><button class="btn btn-success">SignUp</button></a>
             {% endif %}
 
         </div>
