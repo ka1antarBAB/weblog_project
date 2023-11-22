@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import reverse
 
 from .models import Post
-from .forms import NewPostForm
+from .forms import PostForm
 
 
 class PostListView(generic.ListView):
@@ -21,13 +21,13 @@ class PostDetailView(generic.DetailView):
 
 
 class PostCreateView(generic.CreateView):
-    form_class = NewPostForm
+    form_class = PostForm
     template_name = "post/post_create.html"
 
 
 class PostUpdateView(generic.UpdateView):
     model = Post
-    form_class = NewPostForm
+    form_class = PostForm
     template_name = "post/post_create.html"
 
 
@@ -58,13 +58,13 @@ class PostDeleteView(generic.DeleteView):
 
 # def post_add_view(request):
 #     if request.method == "POST":
-#         form = NewPostForm(request.POST)
+#         form = PostForm(request.POST)
 #         if form.is_valid():
 #             form.save()
-#             form = NewPostForm
+#             form = PostForm
 #             return redirect("post_list_view")
 #     else:
-#         form = NewPostForm()
+#         form = PostForm()
 #     return render(request, "post/post_create.html", {"form": form})
 
 # def post_delete_view(request, pk):
